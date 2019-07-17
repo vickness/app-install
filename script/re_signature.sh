@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 
-# appid         应用包名
-# cer_path      证书pem路径
-# key_path      证书key路径
-# profile_path  配置文件路径
-# in_path       ipa输入路径
-# out_path      ipa输出路径
-
-if [[ $# -eq 0 ]]; then
-    echo "Usage: $0 appid [cer_path] [key_path] [profile_path] [in_path] [out_path]"
-    exit 1;
-fi
-
 appid=$1
 cer_path=$2
 key_path=$3
@@ -48,5 +36,7 @@ if [[ ! $out_path ]]; then
     echo "Can't find out_path!";
     exit 1;
 fi
+
+profile_path=$profile_path"/AdHoc_"$appid".mobileprovision"
 
 isign -i CFBundleIdentifier=$appid -c $cer_path -k $key_path -p $profile_path -o $out_path $in_path

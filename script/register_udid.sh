@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 
-# username  账号名称
-# password  账号密码
-# udid      设备UDID
+udid=$1
+username=$2
+password=$3
+session=$4
 
-if [[ $# -eq 0 ]]; then
-    echo "Usage: $0 username password udid"
+if [[ ! $udid ]]; then
+    echo "Can't find udid!";
     exit 1;
 fi
-
-username=$1
-password=$2
-udid=$3
 
 if [[ ! $username ]]; then
     echo "Can't find username!";
@@ -23,13 +20,14 @@ if [[ ! $password ]]; then
     exit 1;
 fi
 
-if [[ ! $udid ]]; then
-    echo "Can't find udid!";
+if [[ ! $session ]]; then
+    echo "Can't find session!";
     exit 1;
 fi
 
 export FASTLANE_USER=$username
 export FASTLANE_PASSWORD=$password
 export FASTLANE_DONT_STORE_PASSWORD='1'
+export FASTLANE_SESSION=$session
 
 fastlane run register_device name:$udid udid:$udid username:$username
