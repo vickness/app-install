@@ -10,7 +10,7 @@ echo "安装zip...";
 yum install zip
 
 echo "安装fastlane..."
-sudo gem install fastlane
+gem install fastlane
 
 echo "安装isign...";
 git clone https://github.com/apperian/isign
